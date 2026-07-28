@@ -1,0 +1,35 @@
+name: Validate Recommendation Baseline
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: recommendation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate recommendation policy
+        run: python3 scripts/validate_recommendation_baseline.py
+      - name: Run negative recommendation safety cases
+        run: python3 scripts/test_recommendation_safety_cases.py
+      - name: Compile Python validators
+        run: python3 -m py_compile scripts/*.py
+      - name: Verify required documentation
+        run: |
+          test -f docs/THREAT_MODEL.md
+          test -f docs/RECOMMENDATION_OPERATIONS_RUNBOOK.md
+          test -f docs/QUALITY_EVALUATION.md
+          test -f docs/PRODUCTION_READINESS.md
+          test -f docs/adr/0001-safe-personalisation.md
