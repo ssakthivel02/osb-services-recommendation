@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "requiredMetadata": ["content_id", "tenant_id", "locale", "age_band", "content_rating", "source_id", "source_classification", "status", "updated_at"],
+  "allowedStatuses": ["published"],
+  "excludedStatuses": ["draft", "archived", "deleted", "restricted"],
+  "sourceClassifications": {
+    "verified": {"eligible": true, "weight": 1.2},
+    "scholarly": {"eligible": true, "weight": 1.1},
+    "traditional": {"eligible": true, "weight": 1.0},
+    "oral": {"eligible": true, "weight": 0.9},
+    "needs_review": {"eligible": true, "weight": 0.6},
+    "restricted": {"eligible": false, "weight": 0.0}
+  },
+  "ageBands": ["3-5", "6-8", "9-12", "13-16", "17+"],
+  "contentRatings": ["general", "guided", "mature"],
+  "childProfiles": {
+    "allowMature": false,
+    "requireGuardianApprovalForGuided": true
+  }
+}
