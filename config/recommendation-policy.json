@@ -1,0 +1,51 @@
+{
+  "version": "1.0.0",
+  "apiPrefix": "/api/v1/recommendations",
+  "requireAuthentication": true,
+  "tenantClaim": "tenant_id",
+  "enforceTenantIsolation": true,
+  "allowClientTenantOverride": false,
+  "supportedLocales": ["en-GB", "ta-IN"],
+  "maximumResults": 50,
+  "defaultResults": 12,
+  "requestTimeoutMilliseconds": 2500,
+  "maximumCandidateCount": 500,
+  "minimumConfidence": 0.35,
+  "excludeRestrictedContent": true,
+  "excludeDeletedContent": true,
+  "excludeExpiredContent": true,
+  "requireSourceMetadata": true,
+  "requireAgeBand": true,
+  "requireContentRating": true,
+  "allowSensitiveAttributeTargeting": false,
+  "allowHealthDiagnosisRecommendations": false,
+  "allowFinancialAdviceRecommendations": false,
+  "allowPoliticalPersuasionRecommendations": false,
+  "childSafetyModeRequired": true,
+  "guardianControlsRequired": true,
+  "diversity": {
+    "enabled": true,
+    "maximumSameCategoryRatio": 0.5,
+    "maximumSameSourceRatio": 0.4,
+    "minimumDistinctCategories": 3
+  },
+  "ranking": {
+    "verifiedSourceBoost": 1.2,
+    "needsReviewPenalty": 0.6,
+    "freshnessMaximumBoost": 0.15,
+    "popularityMaximumBoost": 0.2,
+    "deterministicTieBreak": "content_id"
+  },
+  "privacy": {
+    "logRawProfile": false,
+    "logRawHistory": false,
+    "redactUserIdentifiers": true,
+    "minimumEventRetentionDays": 30,
+    "maximumEventRetentionDays": 365
+  },
+  "rateLimits": {
+    "authenticatedRequestsPerMinute": 120,
+    "privilegedRequestsPerMinute": 60,
+    "burstMultiplier": 2
+  }
+}
